@@ -1,0 +1,140 @@
+@import "normalize";
+@import "fontello.css";
+@import "compass/css3/border-radius";
+
+body {
+	font-family: "Maven Pro", sans-serif;
+}
+
+a {
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.table {
+	tr {
+		th {
+			padding: 8px;
+			border-bottom: 1px solid #eeeeee;
+		}
+	}
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+form {
+	fieldset {
+		border: none;
+	}
+	label {
+		display: block;
+	}
+	legend {
+		height: 64px;
+		line-height: 60px;
+		font-size: 140%;
+		font-weight: bold;
+	}
+	input {
+		width: 420px;
+		height: 32px;
+		padding-left: 4px;
+		border: solid 2px #DDD;
+	}
+	textarea {
+		width: 420px;
+		padding-left: 4px;
+		border: solid 2px #DDD;
+	}
+	input[type="submit"] {
+		height: 48px;
+		padding: 8px 24px;
+		color: white;
+		font-size: 120%;
+		background-color: #C44816;
+		border: none;
+		@include border-radius();
+	}
+
+}
+
+#container {
+	padding-top: 24px;
+	padding-left: 280px;
+}
+
+aside {
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 250px;
+	height: 100%;
+
+	background-color: #393939;
+	ul {
+		width: 64px;
+		height: 100%;
+		background-color: #555555;
+		color: #FFFFFF;
+		font-size: 24px;
+		text-align: center;
+		li {
+			height: 64px;
+			line-height: 60px;
+			a {
+				color: #EEEEEE;
+			}
+		}
+		#sidebar-header {
+			background-color: #C44816;
+		}
+	}
+}
+.sidebar-group {
+	position: absolute;
+	top: 0;
+	left: 64px;
+
+	padding: 0 5px 0 18px;
+	ul {
+		background-color: #393939;
+	}
+}
+
+#content {
+	position: relative;
+
+	width: 100%;
+
+	div {
+		h2 {
+			margin: 0;
+			padding: 0;
+			margin-left: 20px;
+			height: 64px;
+			line-height: 60px;
+			font-size: 140%;
+			font-weight: bold;
+		}
+	}
+	table {
+		margin-left: 20px;
+		tr {
+			td {
+				padding: 8px;
+				border-top: 1px solid #ddd;
+			}
+		}
+	}
+}
+
+.input {
+	margin-bottom: 16px;
+}
