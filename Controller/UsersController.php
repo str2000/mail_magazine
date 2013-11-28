@@ -13,7 +13,7 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'RequestHandler');
+	public $components = array('Session','Paginator', 'RequestHandler');
 
 /**
  * index method
