@@ -93,11 +93,11 @@ class MailMagazinesController extends AppController {
 			$data['Queue']['sent'] = date("Y-m-d h:i:s");
 			$data['Queue']['send'] = 1;
 			$this->Queue->save($data['Queue']);
-			echo "Mail send:".$val['User']['name']."&lt;".$val['User']['email']."&gt; done.<br>";
+			echo "Mail send:".$val['User']['email']." done.<br>";
 		}
 		$contents = $this->Content->find('all',array('order'=>array('Content.id'=>'desc')));
 		foreach($contents as $key => $val){
-			$count = $this->Queue->find('count',array('conditions'=>array('Queue.content_id'=>$val['content']['id'],'Queue.send'=>1)));
+			$count = $this->Queue->find('count',array('conditions'=>array('Queue.content_id'=>$val['Content']['id'],'Queue.send'=>1)));
 			if($val['Content']['started']!='0000-00-00 00:00:00' && !$count){
 				$this->Content->id = $val['Content']['id'];
 				$this->Content->saveField('finished', date("Y-m-d h:i:s"));
@@ -125,7 +125,7 @@ class MailMagazinesController extends AppController {
 	}
 	
 	function delete($id=null) {
-		$this->Content->del($id);
+		$this->Content->delete($id);
 		$this->redirect("/mail_magazines/");
 	}
 }
