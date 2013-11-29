@@ -78,7 +78,7 @@ class MailMagazinesController extends AppController {
 		}
 	}
 	
-	function issue(){
+	function issue($is_test = false){
 		mb_language('uni');
 		mb_internal_encoding('UTF-8');
 		$queues=$this->Queue->find('all',array(
@@ -95,19 +95,21 @@ class MailMagazinesController extends AppController {
 			$this->Queue->save($data['Queue']);
 			echo "Mail send:".$val['User']['email']." done.<br>";
 		}
-		$contents = $this->Content->find('all',array('order'=>array('Content.id'=>'desc')));
-		foreach($contents as $key => $val){
-			$count = $this->Queue->find('count',array('conditions'=>array('Queue.content_id'=>$val['Content']['id'],'Queue.send'=>1)));
-			if($val['Content']['started']!='0000-00-00 00:00:00' && !$count){
-				$this->Content->id = $val['Content']['id'];
-				$this->Content->saveField('finished', date("Y-m-d h:i:s"));
+		if (!$is_test) {
+			$contents = $this->Content->find('all',array('order'=>array('Content.id'=>'desc')));
+			foreach($contents as $key => $val){
+				$count = $this->Queue->find('count',array('conditions'=>array('Queue.content_id'=>$val['Content']['id'],'Queue.send'=>1)));
+				if($val['Content']['started']!='0000-00-00 00:00:00' && !$count){
+					$this->Content->id = $val['Content']['id'];
+					$this->Content->saveField('finished', date("Y-m-d h:i:s"));
+				}
 			}
 		}
 	}
 
 	public function test_issue($id = null) {
 		$this->queue_set($id, true);
-		$this->issue();
+		$this->issue(true);
 		$this->Session->setFlash(__('テスト送信完了しました。'));
 		$this->redirect("/mail_magazines/");
 	}
