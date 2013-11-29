@@ -70,10 +70,10 @@ class MailMagazinesController extends AppController {
 		}
 		$this->Queue->saveAll($data['Queue']);
 		
-		$this->Content->id = $id;
-		$this->Content->saveField('started', date("Y-m-d h:i:s"));
-		
 		if (!$is_test) {
+			$this->Content->id = $id;
+			$this->Content->saveField('started', date("Y-m-d h:i:s"));
+
 			$this->redirect("/mail_magazines/");
 		}
 	}
@@ -89,7 +89,7 @@ class MailMagazinesController extends AppController {
 		foreach($queues as $key=>$val){
 			mb_send_mail($val['User']['email'],$val['Content']['subject'],$val['Content']['body'],"From: {$val['Sender']['name']}<{$val['Sender']['email']}>","-f {$val['Sender']['email']}");
 			
-			$this->Queue->id=$val['Queue']['id'];
+			$this->Queue->id = $val['Queue']['id'];
 			$data['Queue']['sent'] = date("Y-m-d h:i:s");
 			$data['Queue']['send'] = 1;
 			$this->Queue->save($data['Queue']);
